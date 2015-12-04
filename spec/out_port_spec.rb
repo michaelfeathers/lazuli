@@ -18,4 +18,12 @@ describe OutPort do
     OutPort.new(@midi_out).send_off(40, 100)
   end
 
+  it 'clears all playing notes' do
+    expect(@midi_out).to receive(:puts).with(0x90, 40, 100)
+    expect(@midi_out).to receive(:puts).with(0x80, 40, 100)
+    out = OutPort.new(@midi_out)
+    out.send_on(40,100)
+    out.clear
+  end
+
 end
