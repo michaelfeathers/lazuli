@@ -22,7 +22,15 @@ describe OutPort do
   it 'clears all playing notes' do
     expect(@midi_out).to receive(:puts).with(OutPort::MIDI_ON, 40, 100)
     expect(@midi_out).to receive(:puts).with(OutPort::MIDI_OFF, 40, 100)
-    @port.send_on(40,100)
+    @port.send_on(40, 100)
+    @port.clear
+  end
+
+  it 'does not clear notes that have been turned off' do
+    expect(@midi_out).to receive(:puts).with(OutPort::MIDI_ON, 40, 100)
+    expect(@midi_out).to receive(:puts).with(OutPort::MIDI_OFF, 40, 100)
+    @port.send_on(40, 100)
+    @port.send_off(40, 100)
     @port.clear
   end
 

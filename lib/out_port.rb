@@ -19,6 +19,7 @@ class OutPort
 
   def send_off note, velocity
     @output.puts(MIDI_OFF, note, velocity)
+    @active_notes.delete(note)
   end
 
   def clear
