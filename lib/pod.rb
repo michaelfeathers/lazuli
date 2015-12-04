@@ -5,7 +5,12 @@ class Pod
     return enum_for(:each) unless block_given?
 
     loop do
-      yield EmptyCommand.new
+      yield next_value 
     end
+  end
+
+
+  def next_value
+    EmptyCommand.new
   end
 end
