@@ -1,5 +1,6 @@
 
 require 'pod'
+require 'commands'
 
 class PeriodicPod < Pod
 
