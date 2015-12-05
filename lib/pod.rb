@@ -3,14 +3,10 @@
 class Pod
   def each
     return enum_for(:each) unless block_given?
-
-    loop do
-      yield next_value 
-    end
+    loop do; yield next_command; end
   end
 
-
-  def next_value
+  def next_command
     EmptyCommand.new
   end
 end

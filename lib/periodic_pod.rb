@@ -11,11 +11,20 @@ class PeriodicPod < Pod
     @position = 0
   end
 
-  def next_value
-    @iteration = @iteration + 1
-    return EmptyCommand.new unless (@iteration - 1) % @period == 0
-    command = NoteCommand.new(@pattern[@position])
-    @position = (@position + 1) % @pattern.count
+  def next_command
+    command = at_start? ? NoteCommand.new(@pattern[@position]) : EmptyCommand.new
+    advance
     command
+  end
+
+private
+  def advance
+    @iteration = @iteration + 1
+    @position = (@position + 1) % @pattern.count
+  end
+
+
+  def at_start?
+    @iteration % @period == 0
   end
 end
